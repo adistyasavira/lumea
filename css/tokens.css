@@ -1,0 +1,122 @@
+/* LUMÉA — Design tokens, taken from the original editorial prototype (styles.css).
+   Every colour used by the stylesheets is defined here. */
+
+:root {
+  /* Surfaces */
+  --bg-primary: #FBF8F3;
+  --bg-secondary: #F4EFE6;
+  --bg-tertiary: #EFE8DC;
+  --bg-card: #FFFFFF;
+  --bg-header: rgba(251, 248, 243, 0.94);
+  --bg-hero-light: #FFFDF8;
+  --bg-hero-mid: #F5EDE0;
+  --bg-hero-edge: #E8DEC9;
+  --bg-dropzone-hover: #FFFDF9;
+
+  /* Text */
+  --color-text-main: #2A2421;
+  --color-text-muted: #73675E;
+  --color-text-light: #A0948A;
+  --color-white: #FFFFFF;
+
+  /* Gold accent */
+  --color-gold: #C5A059;
+  --color-gold-dark: #A6813B;
+  --color-gold-light: #F3EBDD;
+
+  /* Lines */
+  --color-border: #E6DFC5;
+  --color-border-subtle: #F0EAE0;
+  --color-chip-edge: rgba(0, 0, 0, 0.1);
+  --color-mini-edge: rgba(0, 0, 0, 0.06);
+
+  /* Status */
+  --color-good: #2E7D32;
+  --color-good-wash: #E8F5E9;
+  --color-good-check: #52B788;
+  --color-warn: #E65100;
+  --color-warn-wash: #FFF3E0;
+  --color-bad: #B3261E;
+  --color-bad-wash: #FCE8E6;
+
+  /* Camera stage and face guide */
+  --color-stage: #000000;
+  --color-overlay-dim: rgba(20, 14, 10, 0.45);
+  --color-guide: #FFFFFF;
+  --color-zone-skin: #F6D7B8;
+  --color-zone-brow: #9FD2FF;
+  --color-zone-hair: #C9B8F2;
+  --color-zone-fill: rgba(255, 255, 255, 0.12);
+
+  /* Overlays */
+  --color-loader-backdrop: rgba(251, 248, 243, 0.96);
+  --color-modal-backdrop: rgba(30, 20, 15, 0.6);
+  --color-swatch-label: rgba(255, 255, 255, 0.9);
+  --color-swatch-label-shadow: rgba(0, 0, 0, 0.4);
+  --color-sunbeam-start: rgba(255, 255, 255, 0.4);
+  --color-sunbeam-mid: rgba(255, 248, 235, 0.1);
+
+  /* Decorative colours (hero swatches, loader, step dots) */
+  --deco-coral: #E07A5F;
+  --deco-peach: #F4A261;
+  --deco-wheat: #E9C46A;
+  --deco-teal: #2A9D8F;
+  --deco-sand: #D4A373;
+  --deco-sage: #81B29A;
+  --deco-indigo: #3D405B;
+  --deco-ivory: #F7F4EA;
+  --deco-blush: #E6BEA5;
+  --deco-tan: #C89A82;
+  --deco-skin: #D6A88E;
+  --deco-hair: #4A3428;
+  --deco-moss: #5B6B5C;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --tracking-label: 0.2em;
+  --tracking-button: 0.15em;
+  --tracking-nav: 0.14em;
+
+  /* Shadows */
+  --shadow-subtle: 0 4px 20px rgba(60, 45, 35, 0.04);
+  --shadow-medium: 0 12px 35px rgba(60, 45, 35, 0.08);
+  --shadow-float: 0 20px 45px rgba(45, 30, 20, 0.12);
+  --shadow-gold: 0 4px 15px rgba(197, 160, 89, 0.25);
+  --shadow-gold-strong: 0 6px 20px rgba(166, 129, 59, 0.3);
+  --shadow-wheel: drop-shadow(0 18px 35px rgba(55, 40, 30, 0.14));
+  --shadow-chip: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  /* Shape */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container-max: 1440px;
+  --container-gutter: 2.5rem;
+  --container-gutter-phone: 1.25rem;
+
+  /* Motion */
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-view: 0.4s;
+
+  /* Layers */
+  --z-overlay: 2;
+  --z-countdown: 3;
+  --z-header: 1000;
+  --z-loader: 2000;
+  --z-modal: 3000;
+  --z-toast: 3500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-smooth: none;
+    --duration-view: 0s;
+  }
+}

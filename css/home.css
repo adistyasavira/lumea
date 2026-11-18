@@ -1,0 +1,437 @@
+/* LUMÉA — Home page: hero with colour wheel, season cards, lifestyle split,
+   how it works, quote and newsletter (layout of the original prototype). */
+
+/* HERO */
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+  background-color: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.hero-left {
+  padding: 5rem 4rem 5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-size: 3.8rem;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.hero-subtext {
+  font-size: 1.05rem;
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hero-right {
+  position: relative;
+  background: radial-gradient(circle at 60% 40%, var(--bg-hero-light) 0%, var(--bg-hero-mid) 70%, var(--bg-hero-edge) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  overflow: hidden;
+}
+
+.wheel-artwork-container {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-wheel-svg {
+  width: 340px;
+  max-width: 85%;
+  height: auto;
+  filter: var(--shadow-wheel);
+  transform: rotate(-15deg);
+  transition: transform 12s ease-in-out;
+}
+
+.wheel-artwork-container:hover .color-wheel-svg {
+  transform: rotate(15deg);
+}
+
+.color-wheel__slice {
+  stroke: var(--bg-primary);
+}
+
+.color-wheel__hub {
+  fill: var(--bg-primary);
+  stroke: var(--color-border);
+}
+
+.color-wheel__core {
+  fill: var(--color-gold);
+}
+
+.floating-swatch {
+  position: absolute;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-medium);
+}
+
+.swatch-vertical-1 {
+  left: -25px;
+  top: 40px;
+  width: 60px;
+  height: 110px;
+  background: linear-gradient(180deg, var(--deco-coral) 0%, var(--deco-sand) 50%, var(--deco-sage) 100%);
+}
+
+.swatch-rect-2 {
+  left: -45px;
+  bottom: 80px;
+  width: 90px;
+  height: 55px;
+  background: linear-gradient(90deg, var(--deco-indigo) 0%, var(--deco-sage) 100%);
+}
+
+.swatch-square-3 {
+  left: 20px;
+  bottom: 15px;
+  width: 70px;
+  height: 70px;
+  background-color: var(--deco-coral);
+}
+
+.sunbeam-overlay {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, var(--color-sunbeam-start) 0%, var(--color-sunbeam-mid) 40%, transparent 70%);
+  pointer-events: none;
+}
+
+/* UNLOCK YOUR TRUE HUE */
+.unlock-grid-section,
+.lifestyle-split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: var(--bg-primary);
+}
+
+.unlock-content-col {
+  padding: 6rem 4rem 6rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.unlock-cards-col,
+.lifestyle-img-col {
+  background-color: var(--bg-secondary);
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seasonal-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.swatch-card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  box-shadow: var(--shadow-subtle);
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.swatch-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--color-gold);
+}
+
+.swatch-block-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  height: 65px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.swatch-block-grid .color-box {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--swatch);
+}
+
+.swatch-card-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+/* LIFESTYLE */
+.editorial-img-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+.editorial-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+/* HOW IT WORKS */
+.works-section {
+  padding: 6rem 0;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--color-border-subtle);
+  text-align: center;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.work-step-card {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.75rem;
+}
+
+.step-num {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.step-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.step-swatch-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 1.25rem;
+}
+
+.mini-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--color-mini-edge);
+}
+
+.mini-swatch--ivory { background-color: var(--deco-ivory); }
+.mini-swatch--sand { background-color: var(--deco-blush); }
+.mini-swatch--tan { background-color: var(--deco-tan); }
+.mini-swatch--skin { background-color: var(--deco-skin); }
+.mini-swatch--hair { background-color: var(--deco-hair); }
+.mini-swatch--sage { background-color: var(--deco-moss); }
+.mini-swatch--coral { background-color: var(--deco-coral); }
+.mini-swatch--peach { background-color: var(--deco-peach); }
+.mini-swatch--teal { background-color: var(--deco-teal); }
+
+/* QUOTE */
+.quote-section {
+  background-color: var(--bg-tertiary);
+  padding: 7rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.editorial-quote {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  line-height: 1.2;
+  color: var(--color-text-main);
+  max-width: 850px;
+  margin: 0 auto 2rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.quote-subtext {
+  max-width: 580px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+/* NEWSLETTER */
+.newsletter-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 6rem 0;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.polaroid-stack {
+  position: relative;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-card {
+  position: absolute;
+  background: var(--bg-card);
+  padding: 12px 12px 28px;
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border-subtle);
+  width: 220px;
+}
+
+.polaroid-card img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.polaroid-card:nth-child(1) {
+  transform: rotate(-8deg) translateX(-30px);
+}
+
+.polaroid-card:nth-child(2) {
+  transform: rotate(6deg) translateX(30px) translateY(-10px);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  max-width: 440px;
+}
+
+.newsletter-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background-color: var(--bg-card);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.newsletter-input:focus {
+  border-color: var(--color-gold);
+}
+
+.newsletter-section .field-error,
+.newsletter-section .form-status {
+  max-width: 440px;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-split-grid,
+  .unlock-grid-section,
+  .lifestyle-split-section,
+  .newsletter-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left,
+  .unlock-content-col,
+  .lifestyle-img-col,
+  .unlock-cards-col {
+    padding: 4rem 2rem;
+  }
+
+  .hero-right {
+    min-height: 400px;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-left,
+  .unlock-content-col {
+    padding: 3rem 0;
+  }
+
+  .unlock-cards-col,
+  .lifestyle-img-col,
+  .hero-right {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .hero-headline {
+    font-size: 2.8rem;
+  }
+
+  .editorial-quote {
+    font-size: 2.2rem;
+  }
+
+  .seasonal-swatch-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .floating-swatch {
+    display: none;
+  }
+
+  .editorial-img {
+    height: 300px;
+  }
+}

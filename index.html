@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMÉA — Personal Color Analysis &amp; Harmonic Styling</title>
+  <meta name="description" content="Analisis warna personal berbasis CIELAB di bawah ring light daylight. Temukan season, palette, makeup, perhiasan, dan outfit terbaikmu dalam satu Digital Color Passport.">
+  <meta name="theme-color" content="#FBF8F3">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap">
+
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./css/palettes.css">
+  <link rel="stylesheet" href="./css/consultation.css">
+  <link rel="stylesheet" href="./css/passport.css">
+  <link rel="stylesheet" href="./css/journal.css">
+  <link rel="stylesheet" href="./css/recap.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+  <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Lewati ke konten</a>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand-logo-wrap" data-brand-logo aria-label="LUMÉA, kembali ke beranda">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+        <span class="brand-title">LUMÉA</span>
+      </a>
+      <span class="booth-badge" data-booth-badge hidden></span>
+
+      <button class="mobile-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="site-nav" data-action="toggle-menu">☰</button>
+
+      <nav id="site-nav" aria-label="Navigasi utama">
+        <ul class="nav-menu" data-nav-menu>
+          <li><a href="#home" class="nav-link" data-route-link="home">HOME</a></li>
+          <li><a href="#method" class="nav-link" data-route-link="method">OUR METHOD</a></li>
+          <li><a href="#palettes" class="nav-link" data-route-link="palettes">THE PALETTES</a></li>
+          <li><a href="#consultation" class="nav-link" data-route-link="consultation">CONSULTATIONS</a></li>
+          <li><a href="#journal" class="nav-link" data-route-link="journal">JOURNAL</a></li>
+          <li data-booth-only hidden><a href="#recap" class="nav-link" data-route-link="recap">REKAP</a></li>
+          <li><a href="#home" class="nav-link" data-action="open-booking">BOOK NOW</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ==================== HOME ==================== -->
+    <section class="view-section" data-view="home" hidden>
+      <div class="container">
+        <div class="hero-split-grid">
+          <div class="hero-left">
+            <h1 class="hero-headline">Find the colors<br>that feel like you.</h1>
+            <p class="hero-subtext">Discover your unique personal color palette through an immersive and intuitive color consultation. Unlock confidence and self-expression through light.</p>
+            <div class="hero-cta-group">
+              <a href="#palettes" class="btn btn-outline">EXPLORE PALETTES</a>
+              <button type="button" class="btn btn-gold" data-action="open-booking">BOOK YOUR SESSION</button>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="sunbeam-overlay"></div>
+            <div class="wheel-artwork-container" data-color-wheel></div>
+            <div class="floating-swatch swatch-vertical-1"></div>
+            <div class="floating-swatch swatch-rect-2"></div>
+            <div class="floating-swatch swatch-square-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="unlock-grid-section">
+          <div class="unlock-content-col">
+            <span class="section-label">OUR METHOD</span>
+            <h2 class="section-title">Unlock your true hue</h2>
+            <p class="section-desc">Our method goes beyond seasons, focusing on your unique skin undertone, value, chroma, and contrast. We reveal the hues that make you glow, from the inside out.</p>
+            <div>
+              <a href="#method" class="btn btn-outline">DISCOVER OUR METHOD</a>
+            </div>
+          </div>
+
+          <div class="unlock-cards-col">
+            <div class="seasonal-swatch-grid" data-home-seasons></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="lifestyle-split-section">
+          <div class="unlock-content-col">
+            <span class="section-label">THE EXPERIENCE</span>
+            <h2 class="section-title">Color is more than a season.</h2>
+            <p class="section-desc">Discover the relationship between your natural coloring and the shades that bring your personal style into focus with clarity and grace.</p>
+            <div>
+              <a href="#consultation" class="btn btn-outline">DISCOVER YOUR PALETTE</a>
+            </div>
+          </div>
+
+          <div class="lifestyle-img-col">
+            <div class="editorial-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Pengalaman analisis warna LUMÉA" class="editorial-img" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-section">
+        <div class="container">
+          <span class="section-label">A REFRACTED APPROACH</span>
+          <h2 class="section-title">A more personal way to discover color.</h2>
+
+          <div class="works-grid">
+            <div class="work-step-card">
+              <span class="step-num">01</span>
+              <h3 class="step-title">OBSERVE</h3>
+              <p>Your face is photographed under a calibrated daylight ring light, guided by an on-screen face oval.</p>
+              <div class="step-swatch-row">
+                <span class="mini-swatch mini-swatch--ivory"></span>
+                <span class="mini-swatch mini-swatch--sand"></span>
+                <span class="mini-swatch mini-swatch--tan"></span>
+              </div>
+            </div>
+
+            <div class="work-step-card">
+              <span class="step-num">02</span>
+              <h3 class="step-title">MEASURE</h3>
+              <p>Forehead, both cheeks, brows, and hair are sampled in CIELAB, with the brightest and darkest 15% of pixels trimmed away.</p>
+              <div class="step-swatch-row">
+                <span class="mini-swatch mini-swatch--skin"></span>
+                <span class="mini-swatch mini-swatch--hair"></span>
+                <span class="mini-swatch mini-swatch--sage"></span>
+              </div>
+            </div>
+
+            <div class="work-step-card">
+              <span class="step-num">03</span>
+              <h3 class="step-title">DISCOVER</h3>
+              <p>Reveal your sub-season among 12 palettes, then take home a Digital Color Passport for wardrobe &amp; makeup.</p>
+              <div class="step-swatch-row">
+                <span class="mini-swatch mini-swatch--coral"></span>
+                <span class="mini-swatch mini-swatch--peach"></span>
+                <span class="mini-swatch mini-swatch--teal"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-section">
+        <div class="container">
+          <blockquote class="editorial-quote">“Wearing the right colors is like coming home to yourself.”</blockquote>
+          <p class="quote-subtext">After a Luméa consultation, clients discover a new sense of clarity, effortless dressing, and an authentic reflection of their personality.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="newsletter-section">
+          <div class="polaroid-stack">
+            <div class="polaroid-card">
+              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Moodboard warna" loading="lazy">
+            </div>
+            <div class="polaroid-card">
+              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Gaya yang harmonis" loading="lazy">
+            </div>
+          </div>
+
+          <div>
+            <span class="section-label">JOURNAL &amp; REFLECTIONS</span>
+            <h2 class="section-title">Ready to find your light?</h2>
+            <p class="section-desc">Join our newsletter for exclusive color insights, seasonal tips, and a free guide to ‘The 5 Essential Colors Everyone Needs’.</p>
+            <form class="newsletter-form" data-form="newsletter" novalidate>
+              <label class="visually-hidden" for="newsletter-email">Alamat email</label>
+              <input id="newsletter-email" type="email" name="email" placeholder="Your email address" class="newsletter-input" autocomplete="email" required>
+              <button type="submit" class="btn btn-gold" data-submit>GET THE GUIDE</button>
+            </form>
+            <p class="field-error" data-error-for="email" hidden></p>
+            <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OUR METHOD ==================== -->
+    <section class="view-section" data-view="method" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">THE LUMÉA PHILOSOPHY</span>
+          <h1 class="page-title">Your colors, understood differently.</h1>
+          <p class="page-subtitle">A precise synthesis of undertone, value, chroma, and contrast.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="method-timeline">
+          <div class="method-step-row">
+            <div class="method-circle-badge">01</div>
+            <div class="method-step-content">
+              <h3>OBSERVE</h3>
+              <p>Pengukuran dilakukan di bawah ring light daylight 5500–6500 K yang sejajar mata, sehingga bayangan dan rona lampu ruangan tidak ikut terbaca. Kartu abu-abu opsional dipakai untuk mengoreksi white balance kamera.</p>
+            </div>
+          </div>
+
+          <div class="method-step-row">
+            <div class="method-circle-badge">02</div>
+            <div class="method-step-content">
+              <h3>FRAME</h3>
+              <p>Oval panduan wajah dan garis mata muncul di layar kamera. Enam indikator mengecek kecerahan, area silau, kerataan cahaya, white balance, ketajaman, dan posisi wajah sebelum foto diambil.</p>
+            </div>
+          </div>
+
+          <div class="method-step-row">
+            <div class="method-circle-badge">03</div>
+            <div class="method-step-content">
+              <h3>MEASURE</h3>
+              <p>Dahi, pipi kiri, pipi kanan, alis, dan rambut diubah ke ruang warna CIELAB (L*a*b*). Di setiap zona, 15% piksel paling terang dan 15% paling gelap dibuang (trimmed mean) agar kilap dan bayangan tidak menggeser hasil.</p>
+            </div>
+          </div>
+
+          <div class="method-step-row">
+            <div class="method-circle-badge">04</div>
+            <div class="method-step-content">
+              <h3>CLASSIFY</h3>
+              <p>Empat dimensi dihitung: undertone (sudut hue h°), lightness (ITA°), chroma (C*), dan contrast (selisih L* kulit dengan alis atau rambut). Hasilnya dicocokkan ke 12 sub-season, lengkap dengan persentase keyakinan dan season terdekat kedua.</p>
+            </div>
+          </div>
+
+          <div class="method-step-row">
+            <div class="method-circle-badge">05</div>
+            <div class="method-step-content">
+              <h3>EXPLORE</h3>
+              <p>Lihat drape digital warna terbaik dan warna yang dihindari, bawa pulang Digital Color Passport lewat QR, lalu cek warna baju atau lipstik apa pun dengan ΔE2000 di halaman What suits me.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="method-notice-box">
+          <p><strong>Note on Methodology:</strong> LUMÉA tidak memakai AI pengenal wajah. Foto hanya diproses di perangkat booth, tidak diunggah ke server, dan dihapus begitu sesi selesai. Yang dibawa pulang hanya angka warna di dalam link passport.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== THE PALETTES ==================== -->
+    <section class="view-section" data-view="palettes" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">THE HARMONIC ARCHIVE</span>
+          <h1 class="page-title">The palettes</h1>
+          <p class="page-subtitle">Four seasons. Twelve expressions of you.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="seasons-list" data-palettes-list></div>
+      </div>
+    </section>
+
+    <!-- ==================== CONSULTATIONS (booth flow) ==================== -->
+    <section class="view-section" data-view="consultation" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">INTERACTIVE ANALYSIS · SOLO RP 15.000 · BUNDLE DUO RP 25.000</span>
+          <h1 class="page-title">Find your colors.</h1>
+          <p class="page-subtitle">Begin with a photo under the ring light, then discover the colors that feel most like you.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="consultation-container">
+          <div class="consultation-progress" aria-label="Langkah konsultasi">
+            <div class="progress-step" data-progress="photo">01 PHOTO</div>
+            <div class="progress-step" data-progress="colors">02 YOUR COLORS</div>
+            <div class="progress-step" data-progress="palette">03 YOUR PALETTE</div>
+          </div>
+
+          <!-- STEP 01: PHOTO -->
+          <div class="tool-step-pane" data-step="photo">
+            <div class="pane-intro">
+              <h2 class="section-title">Let’s begin with you.</h2>
+              <p class="section-desc">Isi data singkat, lalu buka kamera ring light. Bila kamera tidak tersedia, unggah foto wajah tanpa makeup tebal di cahaya siang.</p>
+            </div>
+
+            <form class="intake-form" data-form="intake" novalidate>
+              <label class="form-field">
+                <span class="form-label">NICKNAME FOR THE PASSPORT (OPTIONAL)</span>
+                <input class="form-input" name="nickname" maxlength="20" autocomplete="off" placeholder="mis. Dinda">
+              </label>
+              <label class="check-row">
+                <input type="checkbox" name="makeup">
+                <span>Customer memakai foundation atau blush</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" name="reference">
+                <span>Kartu abu-abu terpasang di pojok kiri atas frame</span>
+              </label>
+              <label class="check-row check-row--bundle" data-booth-only hidden>
+                <input type="checkbox" name="bundle">
+                <span><strong>Paket Bundle (2 Orang · Rp 25.000)</strong><br>Centang untuk kedua orang. Masing-masing dicatat Rp 12.500. Tanpa centang = Solo Rp 15.000.</span>
+              </label>
+              <label class="check-row check-row--consent">
+                <input type="checkbox" name="consent" required>
+                <span>Customer setuju: foto hanya diproses di perangkat ini, tidak diunggah, dan dihapus setelah sesi.</span>
+              </label>
+              <p class="field-error" data-intake-error hidden></p>
+              <div class="pane-actions">
+                <button type="submit" class="btn btn-gold">OPEN CAMERA</button>
+              </div>
+            </form>
+
+            <label class="upload-dropzone" data-dropzone>
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1M16 8l-4-4m0 0L8 8m4-4v12"/>
+              </svg>
+              <span class="upload-title">UPLOAD PHOTO</span>
+              <span class="upload-hint">Klik atau jatuhkan foto di sini (JPEG / PNG)</span>
+              <input class="visually-hidden" type="file" accept="image/*" data-upload>
+            </label>
+          </div>
+
+          <!-- STEP 02: YOUR COLORS -->
+          <div class="tool-step-pane" data-step="colors" hidden>
+            <div class="pane-intro">
+              <h2 class="section-title" data-bind="capture-title">Posisikan wajah di dalam oval</h2>
+              <p class="section-desc" data-bind="capture-hint">Mata sejajar garis tipis, wajah memenuhi oval, tanpa kacamata.</p>
+            </div>
+
+            <div class="sampling-workspace">
+              <div class="canvas-viewport-container stage" data-stage>
+                <video class="stage__video" data-camera playsinline muted autoplay></video>
+                <canvas class="stage__still" data-still hidden></canvas>
+                <svg class="stage__overlay guide" data-overlay aria-hidden="true"></svg>
+                <div class="stage__countdown" data-countdown hidden></div>
+              </div>
+
+              <div class="sampling-control-panel">
+                <div class="swatch-display-card" data-preview="skin">
+                  <span class="swatch-preview-circle" data-preview-chip></span>
+                  <span class="swatch-meta">
+                    <span class="swatch-label">SKIN TONE</span>
+                    <span class="swatch-hex" data-preview-hex>—</span>
+                  </span>
+                  <span class="swatch-status-icon" data-preview-status aria-hidden="true">○</span>
+                </div>
+                <div class="swatch-display-card" data-preview="brow">
+                  <span class="swatch-preview-circle" data-preview-chip></span>
+                  <span class="swatch-meta">
+                    <span class="swatch-label">BROW TONE</span>
+                    <span class="swatch-hex" data-preview-hex>—</span>
+                  </span>
+                  <span class="swatch-status-icon" data-preview-status aria-hidden="true">○</span>
+                </div>
+                <div class="swatch-display-card" data-preview="hair">
+                  <span class="swatch-preview-circle" data-preview-chip></span>
+                  <span class="swatch-meta">
+                    <span class="swatch-label">HAIR TONE</span>
+                    <span class="swatch-hex" data-preview-hex>—</span>
+                  </span>
+                  <span class="swatch-status-icon" data-preview-status aria-hidden="true">○</span>
+                </div>
+
+                <span class="panel-label">LIGHTING &amp; FRAMING</span>
+                <ul class="quality" data-quality aria-live="polite"></ul>
+
+                <div class="panel-actions" data-live-actions>
+                  <button type="button" class="btn btn-gold btn-block" data-action="capture" disabled>TAKE PHOTO <kbd>Space</kbd></button>
+                  <button type="button" class="btn btn-outline btn-block" data-action="force-capture">TAKE ANYWAY</button>
+                  <label class="btn btn-outline btn-block">
+                    UPLOAD PHOTO
+                    <input class="visually-hidden" type="file" accept="image/*" data-upload>
+                  </label>
+                </div>
+                <div class="panel-actions" data-review-actions hidden>
+                  <button type="button" class="btn btn-gold btn-block" data-action="analyze">ANALYZE MY COLORS <kbd>Enter</kbd></button>
+                  <button type="button" class="btn btn-outline btn-block" data-action="retake">RETAKE <kbd>R</kbd></button>
+                </div>
+                <button type="button" class="btn-text panel-cancel" data-action="cancel-session">BATAL &amp; KEMBALI</button>
+                <p class="panel-note">Kalibrasi: ring light daylight 5500–6500 K, kecerahan sekitar 70%, sejajar mata, jarak 50–70 cm.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 03: YOUR PALETTE -->
+          <div class="tool-step-pane" data-step="palette" hidden>
+            <div class="result-header-banner">
+              <span class="section-label" data-bind="result-family">Your Luméa Palette</span>
+              <h1 class="result-season-name" data-bind="result-season"></h1>
+              <p class="section-desc result-tagline" data-bind="result-tagline"></p>
+              <div class="result-traits-pills" data-result-traits></div>
+              <p class="result-confidence">Keyakinan analisis <strong class="mono" data-bind="result-confidence"></strong></p>
+              <p class="result-note" data-bind="result-secondary" hidden></p>
+              <p class="result-note" data-bind="result-quality-note" hidden></p>
+            </div>
+
+            <div class="result-swatches-hero" data-result-hero></div>
+            <p class="result-description" data-bind="result-description"></p>
+
+            <h3 class="result-subheading">Yang terukur dari wajahmu</h3>
+            <div class="category-card metrics-card" data-metrics></div>
+
+            <h3 class="result-subheading">Your best colors</h3>
+            <div class="categories-grid">
+              <div class="category-card">
+                <h4>CLOTHING</h4>
+                <div class="category-swatch-list" data-result-clothing></div>
+              </div>
+              <div class="category-card">
+                <h4>MAKEUP</h4>
+                <div class="category-swatch-list" data-result-makeup></div>
+              </div>
+              <div class="category-card">
+                <h4>ACCESSORIES</h4>
+                <div class="category-swatch-list" data-result-metals></div>
+              </div>
+            </div>
+
+            <div class="explore-less-box">
+              <h4>Colors to explore less</h4>
+              <p>Pakai jauh dari wajah: untuk bawahan, tas, atau sepatu.</p>
+              <div class="category-swatch-list category-swatch-list--row" data-result-avoid></div>
+            </div>
+
+            <h3 class="result-subheading">Digital drape</h3>
+            <p class="result-hint">Perhatikan area bawah mata dan garis rahang: warna terbaik membuat kulit tampak lebih merata.</p>
+            <div class="drape-grid" data-drape></div>
+
+            <div class="passport-handoff">
+              <div class="passport-frame" data-passport-mount></div>
+              <div class="handoff">
+                <span class="section-label">DIGITAL COLOR PASSPORT</span>
+                <h3 class="handoff-title">Bawa pulang passport-mu</h3>
+                <div class="qr" data-qr></div>
+                <p>Pindai QR dengan kamera HP. Passport langsung terbuka utuh di HP mana pun dan bisa disimpan atau dibagikan ke story.</p>
+                <a class="qr-link" data-passport-link href="#passport" target="_blank" rel="noopener">Buka link passport</a>
+                <div class="handoff-actions">
+                  <button type="button" class="btn btn-outline btn-block" data-action="download-passport">DOWNLOAD PNG</button>
+                  <a class="btn btn-outline btn-block" data-checker-link href="#what-suits-me">EXPLORE WHAT SUITS ME</a>
+                  <button type="button" class="btn btn-gold btn-block" data-action="next-session">NEXT CUSTOMER <kbd>N</kbd></button>
+                </div>
+                <p class="record-note" data-record-note role="status" hidden></p>
+              </div>
+            </div>
+
+            <p class="disclaimer">Hasil berlaku untuk wajah tanpa makeup tebal di bawah ring light booth ini. Ini titik awal yang terukur, bukan diagnosis; drape kain fisik oleh konsultan tetap standar emas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== WHAT SUITS ME? ==================== -->
+    <section class="view-section" data-view="what-suits-me" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">WARDROBE &amp; BEAUTY EXPLORER</span>
+          <h1 class="page-title">What suits me?</h1>
+          <p class="page-subtitle">Explore colors that complement your personal palette.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="checker-workspace">
+          <form class="checker-card" data-form="checker" novalidate>
+            <span class="section-label">COLOR HARMONY CHECKER</span>
+            <h2 class="section-title">Which color are you curious about?</h2>
+            <p class="section-desc">Pilih season-mu, lalu pilih warna lewat color picker atau ketik kode hex. Warna dibandingkan dengan palette-mu memakai ΔE2000, jarak warna yang mengikuti mata manusia.</p>
+
+            <label class="form-field checker-season">
+              <span class="form-label">YOUR SEASON</span>
+              <select class="form-input" name="season" data-checker-season></select>
+            </label>
+
+            <div class="color-input-controls">
+              <input type="color" value="#C85A32" class="color-picker-input" data-checker-picker aria-label="Pilih warna">
+              <input type="text" value="#C85A32" maxlength="7" class="hex-text-input" data-checker-hex aria-label="Kode hex warna">
+              <button type="submit" class="btn btn-gold">CHECK THIS COLOR</button>
+            </div>
+
+            <div>
+              <span class="chip-list-label">POPULAR SHADES TO TEST:</span>
+              <div class="preset-chip-list" data-checker-presets></div>
+            </div>
+
+            <div class="checker-result-card" data-checker-result aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== REKAPAN BOOTH HARI INI ==================== -->
+    <section class="view-section" data-view="recap" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">BOOTH RECAP</span>
+          <h1 class="page-title">Rekapan Booth Hari Ini</h1>
+          <p class="page-subtitle" data-bind="recap-date"></p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="recap-locked" data-recap-locked hidden>
+          <span class="section-label">KHUSUS ADMIN BOOTH</span>
+          <h2 class="handoff-title">Halaman ini terkunci</h2>
+          <p>Rekapan hanya untuk operator booth. Masukkan PIN admin untuk mengaktifkan Mode Booth di browser ini.</p>
+          <div class="recap-actions">
+            <button type="button" class="btn btn-gold" data-action="unlock-recap">MASUKKAN PIN ADMIN</button>
+            <a href="#home" class="btn btn-outline">KEMBALI KE BERANDA</a>
+          </div>
+        </div>
+
+        <div class="recap-layout" data-recap-content hidden>
+          <p class="form-status" data-recap-status role="status" aria-live="polite"></p>
+
+          <div class="recap-stats">
+            <div class="recap-stat">
+              <span class="recap-stat__label">SESI HARI INI</span>
+              <span class="recap-stat__value" data-bind="recap-sessions">0</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat__label">PEMASUKAN</span>
+              <span class="recap-stat__value" data-bind="recap-revenue">Rp 0</span>
+              <span class="recap-stat__hint" data-bind="recap-packages"></span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat__label">SEASON TERBANYAK</span>
+              <span class="recap-stat__value recap-stat__value--text" data-bind="recap-top">—</span>
+            </div>
+          </div>
+
+          <div class="recap-grid">
+            <div class="category-card">
+              <h4>SEASON HARI INI</h4>
+              <div class="recap-families" data-recap-families></div>
+            </div>
+            <div class="category-card">
+              <h4>LOG SESI</h4>
+              <div class="recap-table-wrap">
+                <table class="recap-table">
+                  <thead>
+                    <tr><th scope="col">Jam</th><th scope="col">Perangkat</th><th scope="col">Passport</th><th scope="col">Nama</th><th scope="col">Season</th><th scope="col">Paket</th><th scope="col">Yakin</th></tr>
+                  </thead>
+                  <tbody data-recap-log></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="recap-actions">
+            <a href="#consultation" class="btn btn-gold">MULAI SESI BARU</a>
+            <button type="button" class="btn btn-outline" data-action="export-csv">EXPORT CSV</button>
+            <button type="button" class="btn btn-outline" data-action="clear-local">HAPUS DATA LOKAL LAPTOP INI</button>
+            <button type="button" class="btn btn-outline" data-action="exit-booth">KELUAR MODE BOOTH</button>
+          </div>
+          <p class="recap-note">Hanya sesi dari laptop booth yang sudah memasukkan PIN admin yang dihitung: Solo Rp 15.000, Bundle Duo Rp 25.000 untuk 2 orang (dicatat Rp 12.500 per orang). Analisis dari HP pengunjung tetap dapat hasil dan PNG, tapi tidak masuk rekap. Foto tidak pernah disimpan atau dikirim.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== JOURNAL ==================== -->
+    <section class="view-section" data-view="journal" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">MAGAZINE &amp; ESSAYS</span>
+          <h1 class="page-title">Journal</h1>
+          <p class="page-subtitle">Tren, makeup, perhiasan, dan outfit dari liputan 2025–2026, lengkap dengan sumbernya.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="journal-grid" data-journal-list></ul>
+      </div>
+    </section>
+
+    <!-- ==================== DIGITAL COLOR PASSPORT (customer phone) ==================== -->
+    <section class="view-section" data-view="passport" hidden>
+      <div class="page-header">
+        <div class="container">
+          <span class="section-label">DIGITAL COLOR PASSPORT</span>
+          <h1 class="page-title">Your color passport.</h1>
+          <p class="page-subtitle">Simpan kartu ini dan bawa saat belanja baju, makeup, atau perhiasan.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="passport-page" data-passport-content hidden>
+          <div class="passport-page__card" data-passport-card></div>
+          <div class="passport-page__side">
+            <div class="checker-card passport-side-card">
+              <span class="section-label">SAVE &amp; SHARE</span>
+              <h2 class="handoff-title" data-bind="passport-season"></h2>
+              <p data-bind="passport-tagline"></p>
+              <button type="button" class="btn btn-gold btn-block" data-action="save-passport">DOWNLOAD PNG</button>
+              <a class="btn btn-outline btn-block" data-passport-checker href="#what-suits-me">CHECK A COLOR</a>
+              <a class="btn btn-outline btn-block" data-passport-palettes href="#palettes">SEE ALL 12 PALETTES</a>
+              <a class="btn-text" href="#journal">READ THE JOURNAL</a>
+            </div>
+          </div>
+        </div>
+        <div class="checker-card passport-error" data-passport-error hidden>
+          <span class="section-label">DIGITAL COLOR PASSPORT</span>
+          <h2 class="handoff-title">Passport tidak terbaca</h2>
+          <p>Link ini rusak atau tidak lengkap. Minta operator booth menampilkan QR sekali lagi.</p>
+          <a class="btn btn-gold" href="#palettes">EXPLORE PALETTES</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">LUMÉA</div>
+      <p class="footer-tagline">“Find the colors that feel like you.”</p>
+
+      <ul class="footer-links">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#method">OUR METHOD</a></li>
+        <li><a href="#palettes">THE PALETTES</a></li>
+        <li><a href="#consultation">CONSULTATIONS</a></li>
+        <li><a href="#journal">JOURNAL</a></li>
+      </ul>
+
+      <div class="footer-bottom">
+        <div>© 2026 Luméa • All Rights Reserved</div>
+        <div><a href="https://www.instagram.com/lumeaproject.id/" target="_blank" rel="noopener">INSTAGRAM @LUMEAPROJECT.ID</a> • <a href="#journal">JOURNAL</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ANALYSIS LOADER -->
+  <div class="analysis-loader-overlay" data-analysis-loader aria-hidden="true">
+    <div class="animating-swatches-ring">
+      <div class="pulsing-swatch"></div>
+      <div class="pulsing-swatch"></div>
+      <div class="pulsing-swatch"></div>
+      <div class="pulsing-swatch"></div>
+    </div>
+    <div class="loader-status-text" data-loader-text role="status">Reading your colors…</div>
+  </div>
+
+  <!-- BOOKING SESSION MODAL -->
+  <div class="modal-backdrop" data-booking-modal hidden>
+    <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+      <button type="button" class="modal-close-btn" data-action="close-booking" aria-label="Tutup form booking">×</button>
+      <span class="section-label">RESERVE AN APPOINTMENT</span>
+      <h2 class="section-title modal-title" id="booking-title">Book your session</h2>
+      <p class="modal-intro">Experience a 1-on-1 Luméa color analysis session. Isi data di bawah, kami balas lewat email atau WhatsApp untuk konfirmasi jadwal.</p>
+
+      <form data-form="booking" novalidate>
+        <div class="form-stack">
+          <label class="form-field">
+            <span class="form-label">FULL NAME</span>
+            <input class="form-input" type="text" name="name" autocomplete="name" placeholder="Dinda Pratiwi" required>
+          </label>
+          <p class="field-error" data-error-for="name" hidden></p>
+
+          <label class="form-field">
+            <span class="form-label">EMAIL ADDRESS</span>
+            <input class="form-input" type="email" name="email" autocomplete="email" placeholder="dinda@email.com" required>
+          </label>
+          <p class="field-error" data-error-for="email" hidden></p>
+
+          <label class="form-field">
+            <span class="form-label">WHATSAPP NUMBER</span>
+            <input class="form-input" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="0812 3456 7890" required>
+          </label>
+          <p class="field-error" data-error-for="phone" hidden></p>
+
+          <label class="form-field">
+            <span class="form-label">PREFERRED CONSULTATION TYPE</span>
+            <select class="form-input" name="type" data-booking-types></select>
+          </label>
+          <p class="field-error" data-error-for="type" hidden></p>
+
+          <label class="form-field">
+            <span class="form-label">PREFERRED DATE (OPTIONAL)</span>
+            <input class="form-input" type="date" name="date" data-booking-date>
+          </label>
+          <p class="field-error" data-error-for="date" hidden></p>
+
+          <label class="form-field">
+            <span class="form-label">NOTES (OPTIONAL)</span>
+            <textarea class="form-input form-textarea" name="message" rows="3" maxlength="500" placeholder="Jam yang kamu inginkan, pertanyaan, dan lain-lain"></textarea>
+          </label>
+          <p class="field-error" data-error-for="message" hidden></p>
+
+          <input class="visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <button type="submit" class="btn btn-gold btn-block" data-submit>REQUEST APPOINTMENT</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN PIN MODAL (Mode Booth) -->
+  <div class="modal-backdrop" data-admin-modal hidden>
+    <div class="modal-window modal-window--narrow" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+      <button type="button" class="modal-close-btn" data-action="close-admin" aria-label="Tutup form PIN admin">×</button>
+      <span class="section-label">MODE BOOTH</span>
+      <h2 class="section-title modal-title" id="admin-title">PIN Admin</h2>
+      <p class="modal-intro">Khusus operator booth. Setelah PIN benar, browser ini mencatat setiap sesi ke Rekapan Hari Ini.</p>
+
+      <form data-form="admin-pin" novalidate>
+        <div class="form-stack">
+          <label class="form-field">
+            <span class="form-label">PIN</span>
+            <input class="form-input form-input--pin" type="password" name="pin" inputmode="numeric" autocomplete="off" maxlength="12" required>
+          </label>
+          <label class="form-field">
+            <span class="form-label">LAPTOP INI ADALAH</span>
+            <select class="form-input" name="device"></select>
+          </label>
+          <p class="form-status form-status--error" data-admin-error role="alert" hidden></p>
+          <button type="submit" class="btn btn-gold btn-block">AKTIFKAN MODE BOOTH</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JOURNAL READER -->
+  <dialog class="modal-window reader" data-reader aria-labelledby="reader-title">
+    <div class="reader__scroll" data-reader-scroll>
+      <button type="button" class="modal-close-btn reader__close" data-action="close-reader" aria-label="Tutup artikel">×</button>
+      <figure class="reader__hero" data-reader-hero></figure>
+      <article class="reader__article">
+        <header class="reader__header">
+          <span class="reader__kicker" data-bind="reader-category"></span>
+          <h2 class="reader__title" id="reader-title" data-bind="reader-title"></h2>
+          <p class="reader__summary" data-bind="reader-summary"></p>
+          <span class="reader__byline" data-bind="reader-meta"></span>
+        </header>
+        <aside class="reader__points">
+          <h3 class="reader__label">POIN PENTING</h3>
+          <ul data-reader-points></ul>
+        </aside>
+        <div class="reader__body" data-reader-body></div>
+        <footer class="reader__sources">
+          <h3 class="reader__label">SUMBER</h3>
+          <div data-reader-sources></div>
+        </footer>
+      </article>
+    </div>
+  </dialog>
+
+  <div class="toasts" data-toasts aria-live="polite"></div>
+
+  <script>
+  if (window.location.hash === '#reserve') {
+    document.body.classList.add('booking-only');
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const bookNav = Array.from(document.querySelectorAll('.site-header a, .site-header button'))
+          .find((el) => el.textContent.trim().toUpperCase() === 'BOOK NOW');
+        if (bookNav) bookNav.click();
+      }, 80);
+    });
+  }
+</script>
+
+</body>
+</html>

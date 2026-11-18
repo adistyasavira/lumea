@@ -1,0 +1,240 @@
+/* LUMÉA — The Palettes (4 families × 3 sub-seasons) and Our Method. */
+
+/* THE PALETTES */
+.seasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 5rem 0;
+}
+
+.season-family {
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  scroll-margin-top: 10rem;
+}
+
+.season-family:last-child {
+  border-bottom: none;
+}
+
+.season-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.season-meta-title {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.season-traits-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.season-swatch-bar {
+  display: flex;
+  height: 75px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.season-swatch-bar .bar-item {
+  flex: 1;
+  height: 100%;
+  background-color: var(--swatch);
+  transition: flex 0.3s ease;
+}
+
+.season-swatch-bar .bar-item:hover {
+  flex: 1.6;
+}
+
+.subseason-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.subseason-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition-smooth);
+  scroll-margin-top: 10rem;
+}
+
+.subseason-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-medium);
+}
+
+.subseason-card .season-swatch-bar {
+  height: 56px;
+  margin-bottom: 0.5rem;
+}
+
+.subseason-card__name {
+  font-size: 1.9rem;
+}
+
+.subseason-card__tagline {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+}
+
+.subseason-card__description {
+  font-size: 0.88rem;
+}
+
+.season-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.season-specs-grid--stacked {
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: auto;
+  padding: 1.1rem 1.25rem;
+}
+
+.spec-category h5 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 0.3rem;
+}
+
+.spec-category p {
+  font-size: 0.86rem;
+  color: var(--color-text-main);
+}
+
+/* OUR METHOD */
+.method-timeline {
+  max-width: 800px;
+  margin: 4rem auto;
+}
+
+.method-step-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+
+.method-step-row::before {
+  content: '';
+  position: absolute;
+  left: 38px;
+  top: 50px;
+  bottom: -40px;
+  width: 1px;
+  background-color: var(--color-border);
+}
+
+.method-step-row:last-child::before {
+  display: none;
+}
+
+.method-circle-badge {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-gold-dark);
+  position: relative;
+}
+
+.method-step-content {
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+}
+
+.method-step-content h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.method-notice-box {
+  background-color: var(--color-gold-light);
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  max-width: 720px;
+  margin: 3rem auto 5rem;
+}
+
+@media (max-width: 1024px) {
+  .season-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .subseason-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .seasons-list {
+    padding: 3rem 0;
+  }
+
+  .method-step-row {
+    grid-template-columns: 52px 1fr;
+    gap: 1rem;
+  }
+
+  .method-step-row::before {
+    left: 26px;
+  }
+
+  .method-circle-badge {
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
+  }
+
+  .method-step-content {
+    padding: 1.5rem;
+  }
+}
