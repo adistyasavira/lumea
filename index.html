@@ -756,83 +756,79 @@
 
   <div class="toasts" data-toasts aria-live="polite"></div>
 
-  <style>
-  body.booking-only .site-header {
-    display: none !important;
-  }
-  body.booking-only [aria-label*="tutup" i],
-  body.booking-only [aria-label*="close" i],
-  body.booking-only .modal-close {
-    display: none !important;
-  }
-</style>
-
 <style>
+  body.booking-only {
+    background: #f5efe6 !important;
+    overflow: hidden !important;
+  }
   body.booking-only .site-header,
-  body.booking-only [aria-label*="tutup" i],
-  body.booking-only [aria-label*="close" i],
-  body.booking-only .modal-close {
-    display: none !important;
+  body.booking-only main,
+  body.booking-only footer {
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 </style>
-
 <script>
+  sessionStorage.removeItem('lumea_qr_lock');
+
   if (window.location.hash === '#reserve') {
-    sessionStorage.setItem('lumea_qr_lock', '1');
-  }
-
-  if (sessionStorage.getItem('lumea_qr_lock') === '1') {
     document.body.classList.add('booking-only');
-    let modalCard = null;
 
-    const lockBookingModal = () => {
-      const visibleForms = Array.from(document.querySelectorAll('form')).filter(
-        (f) => f.getBoundingClientRect().height > 0
-      );
-      const activeForm = visibleForms[visibleForms.length - 1];
+    const openAndLockReserve = () => {
+      const heading = Array.from(document.querySelectorAll('p, span, div, h1, h2, h3'))
+        .find((el) => el.children.length === 0 && el.textContent.trim().toUpperCase() === 'RESERVE AN APPOINTMENT');
 
-      if (!activeForm) {
-        const bookNav = Array.from(document.querySelectorAll('.site-header a, .site-header button'))
-          .find((el) => el.textContent.trim().toUpperCase() === 'BOOK NOW');
-        if (bookNav) bookNav.click();
+      const isModalVisible = heading && heading.getBoundingClientRect().height > 0;
+
+      if (!isModalVisible) {
+        const trigger = Array.from(document.querySelectorAll('a, button'))
+          .find((el) => ['BOOK NOW', 'BOOK YOUR SESSION'].includes(el.textContent.trim().toUpperCase()));
+        if (trigger) trigger.click();
         return;
       }
 
-      modalCard = activeForm.closest('[role="dialog"]') || activeForm.parentElement;
+      let card = heading.parentElement;
+      let backdrop = null;
+      let curr = heading.parentElement;
+      while (curr && curr !== document.body) {
+        if (window.getComputedStyle(curr).position === 'fixed') {
+          backdrop = curr;
+          break;
+        }
+        card = curr;
+        curr = curr.parentElement;
+      }
 
-      // Sembunyikan semua tombol di dalam kotak modal yang berada di luar <form> (termasuk ikon SVG X)
-      if (modalCard) {
-        modalCard.querySelectorAll('button').forEach((btn) => {
-          if (!activeForm.contains(btn)) {
+      if (backdrop) {
+        backdrop.style.background = '#f5efe6';
+        backdrop.style.backdropFilter = 'none';
+        backdrop.style.visibility = 'visible';
+        backdrop.style.pointerEvents = 'none';
+      }
+
+      if (card) {
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.querySelectorAll('button').forEach((btn) => {
+          const label = btn.textContent.trim().toUpperCase();
+          if (btn.type !== 'submit' && !label.includes('REQUEST') && !label.includes('BOOK')) {
             btn.style.display = 'none';
           }
         });
-
-        // Tutup latar belakang jadi krem solid agar halaman belakang tidak terlihat
-        let backdrop = modalCard.parentElement;
-        while (backdrop && backdrop !== document.body) {
-          if (window.getComputedStyle(backdrop).position === 'fixed') {
-            backdrop.style.background = '#f5efe6';
-            backdrop.style.backdropFilter = 'none';
-            break;
-          }
-          backdrop = backdrop.parentElement;
-        }
       }
     };
 
-    window.addEventListener('load', () => {
-      setTimeout(lockBookingModal, 80);
-      setInterval(lockBookingModal, 400);
-    });
+    const runLock = () => {
+      setTimeout(openAndLockReserve, 100);
+      setTimeout(openAndLockReserve, 300);
+      setTimeout(openAndLockReserve, 600);
+    };
 
-    // Blokir klik di luar kotak putih form, tapi bebaskan semua isi form
-    document.addEventListener('click', (e) => {
-      if (modalCard && !modalCard.contains(e.target)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      }
-    }, true);
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', runLock);
+    } else {
+      runLock();
+    }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
