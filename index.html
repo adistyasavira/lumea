@@ -756,16 +756,60 @@
 
   <div class="toasts" data-toasts aria-live="polite"></div>
 
-  <script>
+  <style>
+  body.booking-only .site-header {
+    display: none !important;
+  }
+  body.booking-only [aria-label*="tutup" i],
+  body.booking-only [aria-label*="close" i],
+  body.booking-only .modal-close {
+    display: none !important;
+  }
+</style>
+<script>
   if (window.location.hash === '#reserve') {
     document.body.classList.add('booking-only');
+    let lockedCard = null;
+
     window.addEventListener('load', () => {
       setTimeout(() => {
         const bookNav = Array.from(document.querySelectorAll('.site-header a, .site-header button'))
           .find((el) => el.textContent.trim().toUpperCase() === 'BOOK NOW');
         if (bookNav) bookNav.click();
+
+        setTimeout(() => {
+          const forms = Array.from(document.querySelectorAll('form'));
+          const activeForm = forms.find((f) => f.offsetParent !== null) || forms[forms.length - 1];
+          if (activeForm && activeForm.parentElement) {
+            lockedCard = activeForm.parentElement;
+            if (lockedCard.parentElement) {
+              lockedCard.parentElement.style.background = '#f5efe6';
+              lockedCard.parentElement.style.backdropFilter = 'none';
+            }
+            lockedCard.querySelectorAll('button').forEach((btn) => {
+              const txt = btn.textContent.trim();
+              if (txt === '×' || txt === '✕' || txt.toLowerCase() === 'x') {
+                btn.style.display = 'none';
+              }
+            });
+          }
+        }, 120);
       }, 80);
     });
+
+    document.addEventListener('click', (e) => {
+      if (lockedCard && !lockedCard.contains(e.target)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
   }
 </script>
 
