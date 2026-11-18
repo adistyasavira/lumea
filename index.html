@@ -756,78 +756,62 @@
 
   <div class="toasts" data-toasts aria-live="polite"></div>
 
-<style>
+  <style>
   body.booking-only {
     background: #f5efe6 !important;
     overflow: hidden !important;
   }
   body.booking-only .site-header,
-  body.booking-only main,
-  body.booking-only footer {
-    visibility: hidden !important;
-    pointer-events: none !important;
+  body.booking-only footer,
+  body.booking-only [data-booking-modal] .modal-close-btn,
+  body.booking-only [data-action="close-booking"] {
+    display: none !important;
+  }
+  body.booking-only [data-booking-modal] {
+    background: #f5efe6 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 </style>
 <script>
-  sessionStorage.removeItem('lumea_qr_lock');
-
   if (window.location.hash === '#reserve') {
     document.body.classList.add('booking-only');
 
-    const openAndLockReserve = () => {
-      const heading = Array.from(document.querySelectorAll('p, span, div, h1, h2, h3'))
-        .find((el) => el.children.length === 0 && el.textContent.trim().toUpperCase() === 'RESERVE AN APPOINTMENT');
+    const initLockedBooking = () => {
+      const modal = document.querySelector('[data-booking-modal]');
+      const dialog = modal ? modal.querySelector('.modal-window') : null;
+      const mainEl = document.querySelector('main');
 
-      const isModalVisible = heading && heading.getBoundingClientRect().height > 0;
-
-      if (!isModalVisible) {
-        const trigger = Array.from(document.querySelectorAll('a, button'))
-          .find((el) => ['BOOK NOW', 'BOOK YOUR SESSION'].includes(el.textContent.trim().toUpperCase()));
-        if (trigger) trigger.click();
-        return;
+      if (mainEl && modal && !mainEl.contains(modal)) {
+        mainEl.style.display = 'none';
       }
 
-      let card = heading.parentElement;
-      let backdrop = null;
-      let curr = heading.parentElement;
-      while (curr && curr !== document.body) {
-        if (window.getComputedStyle(curr).position === 'fixed') {
-          backdrop = curr;
-          break;
-        }
-        card = curr;
-        curr = curr.parentElement;
+      const openBtn = document.querySelector('[data-action="open-booking"]') ||
+        Array.from(document.querySelectorAll('a, button')).find(
+          (el) => el.textContent.trim().toUpperCase() === 'BOOK NOW'
+        );
+
+      if (openBtn && modal && modal.hasAttribute('hidden')) {
+        openBtn.click();
+      }
+      if (modal && modal.hasAttribute('hidden')) {
+        modal.removeAttribute('hidden');
       }
 
-      if (backdrop) {
-        backdrop.style.background = '#f5efe6';
-        backdrop.style.backdropFilter = 'none';
-        backdrop.style.visibility = 'visible';
-        backdrop.style.pointerEvents = 'none';
-      }
-
-      if (card) {
-        card.style.visibility = 'visible';
-        card.style.pointerEvents = 'auto';
-        card.querySelectorAll('button').forEach((btn) => {
-          const label = btn.textContent.trim().toUpperCase();
-          if (btn.type !== 'submit' && !label.includes('REQUEST') && !label.includes('BOOK')) {
-            btn.style.display = 'none';
+      if (modal && dialog) {
+        modal.addEventListener('click', (e) => {
+          if (!dialog.contains(e.target)) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
           }
-        });
+        }, true);
       }
-    };
-
-    const runLock = () => {
-      setTimeout(openAndLockReserve, 100);
-      setTimeout(openAndLockReserve, 300);
-      setTimeout(openAndLockReserve, 600);
     };
 
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', runLock);
+      document.addEventListener('DOMContentLoaded', () => setTimeout(initLockedBooking, 60));
     } else {
-      runLock();
+      setTimeout(initLockedBooking, 60);
     }
 
     document.addEventListener('keydown', (e) => {
